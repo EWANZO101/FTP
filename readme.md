@@ -10,7 +10,9 @@ This Python script (`launcher.py`) provides a simple solution for remotely start
 
 
 ### TEST 
-# THIS IS WHAT IT CURRENTLY STARTS [Link to Another Folder](../another_folder)
+# THIS IS WHAT IT CURRENTLY STARTS 
+[Server](https://github.com/EWANZO101/FTP/tree/main/Server/another_folder)
+
 
 ## Customization
 
