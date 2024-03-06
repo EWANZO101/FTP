@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Start/Stop Executable</title>
+</head>
+<body>
+<h1>Start/Stop Executable</h1>
+<button onclick="startExecutable()">Start Executable</button>
+<button onclick="stopExecutable()">Stop Executable</button>
+
+<script>
+function startExecutable() {
+    fetch('/start_exe')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to start executable.');
+            }
+            console.log('Executable started successfully.');
+        })
+        .catch(error => console.error('Error starting executable:', error));
+}
+
+function stopExecutable() {
+    fetch('/stop_exe')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to stop executable.');
+            }
+            console.log('Executable stopped successfully.');
+        })
+        .catch(error => console.error('Error stopping executable:', error));
+}
+</script>
+</body>
+</html>
