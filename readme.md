@@ -13,6 +13,11 @@ This Python script (`launcher.py`) provides a simple solution for remotely start
 # THIS IS WHAT IT CURRENTLY STARTS 
 [Server](https://github.com/EWANZO101/FTP/tree/main/Server/)
 
+# WHY THE NEED
+
+It's a great idea if you want users to share one VPS and not have to create a lot of accounts on the VPS. Then, you can lock down every permission to prevent them from affecting other users' servers, power, and other things.
+
+
 
 ## Customization
 
