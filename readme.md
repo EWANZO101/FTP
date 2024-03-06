@@ -8,6 +8,10 @@ This Python script (`launcher.py`) provides a simple solution for remotely start
 
 2. **Running the Script**: Run the `launcher.py` script on your Windows or Linux server. It will automatically start the executable files specified in the script.
 
+
+### TEST 
+# THIS IS WHAT IT CURRENTLY STARTS [Link to Another Folder](../another_folder)
+
 ## Customization
 
 Feel free to customize the `launcher.py` script according to your needs. You can add error handling, logging, or additional features as required.
