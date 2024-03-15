@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Swift Peak Hosting FTP Control Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Additions and corrections for custom styles */
+        body {
+            background-color: #0D1117; /* Changed background color */
+            color: #FFF;
+        }
+
+        .btn-green {
+            background-color: #4CAF50;
+            color: #FFF;
+            border-color: #4CAF50;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-red {
+            background-color: #FF0000;
+            color: #FFF;
+            border-color: #FF0000;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .usage-bar {
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            position: relative;
+        }
+
+        .usage-bar-fill {
+            border-radius: 5px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #4CAF50;
+        }
+
+        .usage-label {
+            margin-top: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Adjustments to remove blue background */
+        .btn-blue {
+            background-color: #1F6FEB;
+            border-color: #1F6FEB;
+            color: #FFF;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-blue:hover {
+            background-color: #0053ba;
+            border-color: #0053ba;
+        }
+
+        .text-blue-50 {
+            color: #9AA5B1;
+        }
+
+        .text-blue-200 {
+            color: #6B7280;
+        }
+
+        .text-blue-500 {
+            color: #1F6FEB;
+        }
+
+        /* Adjustments to remove blue background */
+        .bg-blue-800 {
+            background-color: #0D1117; /* Changed background color */
+        }
+
+        .bg-blue-900 {
+            background-color: #0D1117; /* Changed background color */
+        }
+
+        .text-blue-50 {
+            color: #9AA5B1; /* Adjusted text color */
+        }
+
+        .text-blue-200 {
+            color: #6B7280; /* Adjusted text color */
+        }
+
+        .text-blue-500 {
+            color: #1F6FEB; /* Adjusted text color */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto py-8 px-4">
+        <div class="rounded-lg shadow-lg p-8 mb-8">
+            <h1 class="text-3xl font-bold text-center mb-4">Welcome to Swift Peak Hosting FTP Control Panel</h1>
+        </div>
+
+        <div class="rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-center mb-4">Server Control</h2>
+            <div class="flex justify-center space-x-4 mb-4">
+                <form action="/start" method="post">
+                    <button type="submit" class="btn-green" {% if server_running %} disabled {% endif %}>
+                        {% if server_running %} Server Running {% else %} Start Server {% endif %}
+                    </button>
+                </form>
+                <form action="/stop" method="post">
+                    <button type="submit" class="btn-red" {% if not server_running %} disabled {% endif %}>
+                        {% if not server_running %} Server Stopped {% else %} Stop Server {% endif %}
+                    </button>
+                </form>
+            </div>
+            <div id="serverStatus" class="text-center text-lg font-bold {% if server_running %}text-green-500{% else %}text-red-500{% endif %}">
+                {% if server_running %}Running{% else %}Stopped{% endif %}
+            </div>
+        </div>
+
+        <div class="rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-center mb-4">System Usage</h2>
+            <div class="flex justify-center space-x-4 mb-4 usage-container">
+                <div>
+                    <div class="text-center">RAM Usage:</div>
+                    <div class="usage-bar">
+                        <div id="ramUsage" class="usage-bar-fill"></div>
+                    </div>
+                    <div id="ramUsageLabel" class="usage-label"></div>
+                </div>
+                <div>
+                    <div class="text-center">CPU Usage:</div>
+                    <div class="usage-bar">
+                        <div id="cpuUsage" class="usage-bar-fill"></div>
+                    </div>
+                    <div id="cpuUsageLabel" class="usage-label"></div>
+                </div>
+                <div>
+                    <div class="text-center">Disk K Usage:</div>
+                    <div class="usage-bar">
+                        <div id="diskUsage" class="usage-bar-fill"></div>
+                    </div>
+                    <div id="diskUsageLabel" class="usage-label"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-center mb-4">FTP Details</h2>
+            <p>IP: <span id="username">YourUsernameHere</span></p>
+            <p>Username: <span id="username">YourUsernameHere</span></p>
+            <p>Password: <span id="username">YourUsernameHere</span></p>
+            <p>Port: <span id="username">YourUsernameHere</span></p>
+        </div>
+        
+            
+            <form action="/launch_ftp" method="get">
+                <label for="ftp_program" class="block mb-2 text-blue-50">Select FTP Program:</label>
+                <div class="relative">
+                    <select name="ftp_program" id="ftp_program" class="block w-full py-2 px-4 rounded-lg bg-gray-700 text-blue-50 appearance-none focus:outline-none focus:ring focus:border-blue-500">
+                        <option value="winscp">WinSCP</option>
+                        <option value="mobaxterm">MobaXterm</option>
+                        <option value="filezilla">filezilla</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-blue-200">
+                        <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 12a1 1 0 01-.707-.293l-3-3a1 1 0 111.414-1.414L10 10.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-.707.293z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex justify-center mt-4">
+                    <button type="submit" class="btn-blue">Launch FTP</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="rounded-lg shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-center mb-4">Download FTP Programs</h2>
+            <div class="flex justify-center space-x-4">
+                <a href="https://download.mobatek.net/2402024022512842/MobaXterm_Installer_v24.0.zip" class="btn-blue" target="_blank">Download MobaXterm</a>
+                <a href="https://winscp.net/download/files/20240315200896fa6648e9bd5ace67d0224e02b441de/WinSCP-6.3.2-Setup.exe" class="btn-blue" target="_blank">Download WinSCP</a>
+                <a href="https://download.filezilla-project.org/client/FileZilla_3.66.5_win64_sponsored-setup.exe" class="btn-blue" target="_blank">Download File Zilla</a>
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateUsage() {
+            fetch('/usage')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ramUsage').style.width = data.ram_usage + '%';
+                    document.getElementById('ramUsageLabel').innerText = data.ram_usage + '%';
+                    document.getElementById('cpuUsage').style.width = data.cpu_usage + '%';
+                    document.getElementById('cpuUsageLabel').innerText = data.cpu_usage + '%';
+                    document.getElementById('diskUsage').style.width = data.disk_usage + '%';
+                    document.getElementById('diskUsageLabel').innerText = data.disk_usage + '%';
+                });
+        }
+
+        // Update usage every second
+        setInterval(updateUsage, 1000);
+
+        // Function to update server status
+        function updateServerStatus() {
+            fetch('/status')
+                .then(response => response.json())
+                .then(data => {
+                    const serverStatusElement = document.getElementById('serverStatus');
+                    serverStatusElement.innerText = data.status;
+                    if (data.status === 'running') {
+                        serverStatusElement.classList.add('text-green-500');
+                        serverStatusElement.classList.remove('text-red-500');
+                    } else {
+                        serverStatusElement.classList.add('text-red-500');
+                        serverStatusElement.classList.remove('text-green-500');
+                    }
+                });
+        }
+
+        // Update server status every 5 seconds
+        setInterval(updateServerStatus, 1000);
+    </script>
+</body>
+</html>

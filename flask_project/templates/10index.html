@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FX Server Control</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white p-4">
+    <div class="max-w-md mx-auto bg-gray-800 shadow-md rounded-md p-6">
+        <h1 class="text-2xl mb-4">FX Server Control</h1>
+        <p class="mb-4">Server Status: {% if server_running %} Running {% else %} Stopped {% endif %}</p>
+        <form action="/start" method="post" class="mb-4">
+            <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md">Start Server</button>
+        </form>
+        <form action="/stop" method="post">
+            <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-md">Stop Server</button>
+        </form>
+    </div>
+</body>
+</html>
