@@ -1,5 +1,5 @@
 # Remote Executable Control for Windows and Linux
-
+Linux update coming soon 
 This Python script (`launcher.py`) provides a simple solution for remotely starting and stopping executable (.exe) files on both Windows and Linux systems. It's designed to be versatile and easy to use, particularly for managing game servers, Discord bots, and other applications run through executable files (.exe or .bat).
 
 ## Usage
